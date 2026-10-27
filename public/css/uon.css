@@ -1,0 +1,318 @@
+/* ==========================================================================
+   UON.CSS
+   Extensões do template para o website da Universidade Onze de Novembro.
+   Carregado DEPOIS de variables/components/pages/responsive.css.
+   Não altera a composição do Header/Footer: apenas o contentor global,
+   o dimensionamento proporcional do logótipo oficial e os componentes
+   necessários ao conteúdo dinâmico (imagens reais, editor, paginação…).
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------- */
+/* Contentor global — largura total do ecrã                                 */
+/* Os fundos (header, hero, secções, footer) ocupam 100% da largura; o     */
+/* conteúdo fica dentro de .container-xl com um espaçamento lateral        */
+/* (--site-gutter) para nunca tocar nas bordas do ecrã.                    */
+/* ---------------------------------------------------------------------- */
+html { min-height: 100%; }
+
+body.site-body {
+  margin: 0;
+  background: var(--site-outer-background);
+}
+
+.site-shell {
+  width: var(--site-width);
+  max-width: var(--site-max-width);
+  margin-inline: auto;
+  min-height: 100vh;
+  background: var(--bg);
+  overflow-wrap: break-word;
+  /* clip (e não hidden): evita overflow horizontal sem criar um contexto de
+     scroll, preservando o header "sticky" do template. */
+  overflow-x: clip;
+  display: flex;
+  flex-direction: column;
+}
+.site-shell > main { flex: 1 0 auto; }
+
+img, video, iframe { max-width: 100%; }
+
+/* Espaçamento lateral do conteúdo (todos os ecrãs) */
+.site-shell .container-xl {
+  padding-inline: var(--site-gutter);
+}
+
+/* O mega menu do template ocupa a largura do navbar; garante que nunca
+   ultrapassa o contentor global. */
+.mega-menu { max-width: 100%; }
+
+/* ---------------------------------------------------------------------- */
+/* Logótipo oficial — proporção preservada                                 */
+/* O logótipo UON (714×342, ≈2,1:1) é mais alto do que o logótipo          */
+/* horizontal de demonstração (≈4,2:1). A altura é ajustada para que o     */
+/* texto continue legível, sem alterar a altura do header nem a posição.   */
+/* ---------------------------------------------------------------------- */
+.brand-logo img { height: 64px; width: auto; object-fit: contain; }
+.offcanvas-header .offcanvas-logo { height: 44px; width: auto; }
+.site-footer .footer-brand-logo { height: 68px; width: auto; }
+@media (max-width: 767.98px) {
+  .brand-logo img { height: 46px; }
+}
+
+/* Acento amarelo (estrela do logótipo) — uso pontual */
+.about-figure-tag { border-top: 3px solid var(--uon-accent); }
+
+/* ---------------------------------------------------------------------- */
+/* Imagens reais nos componentes do template (substituem .ph-media)        */
+/* ---------------------------------------------------------------------- */
+.ph-media > img.media-cover,
+.media-cover-wrap > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ph-media.has-image { background: var(--surface-alt); }
+.gallery-item .ph-media img.media-cover { transition: transform 0.3s ease; }
+.gallery-item:hover .ph-media img.media-cover { transform: scale(1.04); }
+.gallery-item:focus-visible { outline: 2px solid var(--primary-600); outline-offset: 2px; }
+.gallery-item .gallery-caption { pointer-events: none; }
+.gallery-item:focus-within .gallery-caption { opacity: 1; }
+@media (hover: none) { .gallery-item .gallery-caption { opacity: 1; } }
+button.gallery-item { border: 0; padding: 0; background: none; width: 100%; display: block; text-align: left; }
+
+.partner-logo img { max-height: 56px; max-width: 100%; object-fit: contain; }
+a.partner-logo:hover { border-color: var(--primary-600); color: var(--primary-700); }
+
+/* ---------------------------------------------------------------------- */
+/* Conteúdo editorial (HTML sanitizado do editor)                           */
+/* ---------------------------------------------------------------------- */
+.article-body img { height: auto; border-radius: var(--radius); margin: 0.5rem 0 1rem; }
+.article-body figure { margin: 1.75rem 0; }
+.article-body figcaption { font-family: var(--font-ui); font-size: 0.82rem; color: var(--muted); margin-top: 0.4rem; }
+.article-body h3 { font-size: 1.15rem; margin: 1.75rem 0 0.75rem; }
+.article-body ul, .article-body ol { margin-bottom: 1.4rem; }
+.article-body table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  display: block;
+  overflow-x: auto;
+}
+.article-body table th,
+.article-body table td { border: 1px solid var(--border); padding: 0.6rem 0.8rem; vertical-align: top; }
+.article-body table thead th,
+.article-body table th { background: var(--surface-alt); font-weight: 700; }
+.article-body a { text-decoration: underline; text-underline-offset: 2px; }
+
+/* Texto simples dos blocos (parágrafos) */
+.block-text p:last-child { margin-bottom: 0; }
+
+/* ---------------------------------------------------------------------- */
+/* Estados                                                                  */
+/* ---------------------------------------------------------------------- */
+.empty-state.empty-state-boxed {
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.preview-banner {
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+  background: var(--uon-accent);
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0.5rem 1rem;
+}
+
+.demo-badge {
+  display: inline-block;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+  background: var(--uon-accent);
+  color: var(--ink);
+  vertical-align: middle;
+}
+
+/* Filtros por links (server-side) — mesmo aspecto dos .filter-chip do template */
+a.filter-chip { text-decoration: none; }
+a.filter-chip:hover { border-color: var(--primary-600); color: var(--primary-700); }
+.filter-chip.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.filter-chip.active:hover { color: #fff; }
+
+/* Pesquisa: realce dos termos */
+.search-result-item mark { background: var(--primary-50); color: inherit; padding: 0 0.1em; }
+
+/* Event card como link */
+a .card-event { transition: border-color 0.18s ease, box-shadow 0.18s ease; }
+a:hover .card-event { border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+.card-event.is-past .event-date { background: var(--muted); }
+
+/* Vídeos (multimédia / blocos) */
+.ratio iframe { border: 0; border-radius: var(--radius); }
+
+/* Lightbox da galeria (padrão u-lightbox do Universidades.ao) */
+.uon-lightbox .modal-content { background: transparent; border: 0; }
+.uon-lightbox img { width: 100%; max-height: 80vh; object-fit: contain; border-radius: var(--radius); background: #000; }
+.uon-lightbox .btn-close { position: absolute; right: 0; top: -2.5rem; }
+.uon-lightbox .lightbox-caption { color: #fff; font-size: 0.9rem; margin-top: 0.75rem; text-align: center; }
+
+/* Formulário de contacto: honeypot fora do ecrã */
+.hp-field { position: absolute !important; left: -10000px !important; width: 1px; height: 1px; overflow: hidden; }
+
+/* Mapa incorporado */
+.contact-map-embed { border-radius: var(--radius-lg); overflow: hidden; min-height: 420px; }
+.contact-map-embed iframe { width: 100%; height: 420px; border: 0; display: block; }
+
+/* Lista de documentos anexos */
+.attached-docs .doc-row h3 { font-size: 0.95rem; }
+
+/* Etiquetas de notícias */
+.tag-list a {
+  display: inline-block;
+  font-size: 0.78rem;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  color: var(--muted);
+  margin: 0 0.35rem 0.35rem 0;
+}
+.tag-list a:hover { border-color: var(--primary-600); color: var(--primary-700); }
+
+/* Paginação gerada pelo Laravel (Bootstrap 5) com o aspecto do template */
+.pagination { flex-wrap: wrap; gap: 0; }
+.pagination .page-item.disabled .page-link { color: var(--muted-2); }
+nav[aria-label] > .d-sm-flex p.small { display: none; }
+
+/* Foco visível no flyout de pesquisa e chips */
+.filter-chip:focus-visible { outline: 2px solid var(--primary-600); outline-offset: 2px; }
+
+/* Cartões de directório nas colunas laterais: altura natural (o height:100% do
+   template estica-os quando a coluna é um item flex alongado). */
+.col-lg-4 > .card-directory { height: auto; }
+
+/* ---------------------------------------------------------------------- */
+/* Banner da página inicial (carrossel)                                    */
+/* Fotografia de fundo, escurecida à esquerda para garantir a legibilidade  */
+/* do texto; título em Lora (tipografia editorial do template).            */
+/* ---------------------------------------------------------------------- */
+.uon-hero { position: relative; background: var(--ink); color: #fff; }
+.uon-hero .carousel-item { position: relative; min-height: clamp(460px, 64vh, 640px); overflow: hidden; }
+.uon-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.uon-hero-shade {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(20, 18, 18, 0.94) 0%, rgba(20, 18, 18, 0.82) 30%, rgba(20, 18, 18, 0.35) 62%, rgba(20, 18, 18, 0.05) 100%);
+}
+.uon-hero-content { position: relative; z-index: 1; min-height: inherit; display: flex; align-items: center; padding-top: 4rem; padding-bottom: 5.5rem; }
+.uon-hero-text { max-width: 38rem; }
+.uon-hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;
+  font-family: var(--font-ui); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #fff;
+}
+.uon-hero-eyebrow::before { content: ""; width: 34px; height: 3px; background: var(--uon-red); display: inline-block; }
+.uon-hero-title {
+  font-family: var(--font-body); font-weight: 700; color: #fff; letter-spacing: -0.01em;
+  font-size: clamp(2.1rem, 4.4vw, 3.6rem); line-height: 1.08; margin: 0 0 1.25rem;
+}
+.uon-hero-title span { display: block; }
+.uon-hero-lead { color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; line-height: 1.6; max-width: 34rem; margin-bottom: 0; }
+.uon-hero-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 2rem; }
+.uon-hero-actions .btn { display: inline-flex; align-items: center; gap: 0.6rem; }
+.uon-hero-actions .btn .bi { transition: transform 0.15s ease; }
+.uon-hero-actions .btn:hover .bi { transform: translateX(3px); }
+.uon-hero-controls-wrap { position: absolute; left: 0; right: 0; bottom: 1.5rem; z-index: 2; pointer-events: none; }
+.uon-hero-controls { display: flex; justify-content: flex-end; align-items: center; gap: 0.35rem; pointer-events: auto; }
+.uon-hero-counter { font-family: var(--font-ui); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; color: rgba(255, 255, 255, 0.9); margin-right: 0.6rem; font-variant-numeric: tabular-nums; }
+.uon-hero-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(20, 18, 18, 0.35); color: #fff; display: inline-grid; place-items: center; font-size: 1rem;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.uon-hero-btn:hover, .uon-hero-btn:focus-visible { background: var(--primary-600); border-color: var(--primary-600); }
+.uon-hero-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.uon-hero.carousel-fade .carousel-item { transition-duration: 0.8s; }
+
+@media (max-width: 767.98px) {
+  .uon-hero .carousel-item { min-height: 520px; }
+  .uon-hero-shade { background: linear-gradient(180deg, rgba(20, 18, 18, 0.55) 0%, rgba(20, 18, 18, 0.9) 60%, rgba(20, 18, 18, 0.95) 100%); }
+  .uon-hero-content { align-items: flex-end; padding-bottom: 5rem; }
+  .uon-hero-controls { justify-content: flex-start; }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Plano curricular — estrutura do curso.html (Universidades.ao):          */
+/* separadores por ano (.u-years) e cartões por semestre (.u-sem).         */
+/* ---------------------------------------------------------------------- */
+.uon-years { gap: 0.5rem; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+.uon-years::-webkit-scrollbar { display: none; }
+.uon-years .nav-link {
+  white-space: nowrap; border: 1px solid var(--border); border-radius: var(--radius); background: #fff; color: var(--ink);
+  font-family: var(--font-ui); font-weight: 700; font-size: 0.86rem; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.6rem 1.15rem; text-align: left;
+}
+.uon-years .nav-link small { display: block; font-weight: 500; text-transform: none; letter-spacing: 0; font-size: 0.72rem; color: var(--muted); }
+.uon-years .nav-link:hover { border-color: var(--primary-600); }
+.uon-years .nav-link.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+.uon-years .nav-link.active small { color: var(--primary); }
+.uon-sem { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: #fff; }
+.uon-sem-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.85rem 1.1rem; background: var(--surface-alt); border-bottom: 1px solid var(--border); }
+.uon-sem-head h3 { font-size: 0.98rem; margin: 0; }
+.uon-sem-badge { background: var(--primary-600); color: #fff; font-family: var(--font-ui); font-size: 0.74rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 999px; white-space: nowrap; }
+.uon-sem table { font-family: var(--font-ui); font-size: 0.9rem; }
+.uon-sem th { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 0.7rem 1.1rem; background: #fff; }
+.uon-sem td { padding: 0.6rem 1.1rem; color: var(--text); border-top: 1px solid var(--border); }
+.uon-sem td.code { color: var(--muted); font-size: 0.82rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.uon-sem .num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.uon-sem tfoot td { font-weight: 700; color: var(--ink); background: var(--surface-alt); }
+.uon-type-op { display: inline-block; font-family: var(--font-ui); font-size: 0.66rem; font-weight: 700; padding: 0.1rem 0.45rem; border-radius: 4px; margin-left: 0.4rem; background: var(--primary-50); color: var(--primary-700); vertical-align: middle; }
+.uon-legend { font-family: var(--font-ui); font-size: 0.8rem; color: var(--muted); }
+
+/* Cartões inteiramente clicáveis (stretched-link) */
+.card-link { cursor: pointer; }
+.card-link:hover h3 { color: var(--primary-700); }
+.card-link:focus-within { outline: 2px solid var(--primary-600); outline-offset: 2px; }
+.card-link .stretched-link:focus-visible { outline: none; }
+.unit-card-summary { color: var(--primary-600); font-size: 0.84rem; font-weight: 600; margin: 0 0 0.25rem; }
+
+/* ---------------------------------------------------------------------- */
+/* Unidade orgânica: Localização + Contactos (instituicao.html do          */
+/* Universidades.ao: .i-loc / .i-map / .i-contacts), com tokens UON.       */
+/* ---------------------------------------------------------------------- */
+.unit-loc { border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; height: 100%; background: #fff; }
+.unit-map { position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 16 / 8; min-height: 260px;
+  background: linear-gradient(135deg, var(--primary-50) 0%, #f3f0f0 100%); }
+.unit-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.unit-pin { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; gap: 0.6rem; align-items: center; background: #fff; border-radius: var(--radius); padding: 0.7rem 1rem; box-shadow: var(--shadow); }
+.unit-pin .bi { color: var(--primary-600); font-size: 1.5rem; }
+.unit-pin strong { display: block; font-size: 0.9rem; color: var(--ink); }
+.unit-pin small { color: var(--muted); }
+.unit-maps-btn { position: absolute; left: 10px; bottom: 10px; z-index: 1; background: #fff; border-radius: var(--radius-sm); padding: 0.4rem 0.75rem; font-size: 0.8rem; font-weight: 600; color: var(--ink); box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.3); }
+.unit-maps-btn .bi { color: var(--primary-600); }
+.unit-maps-btn:hover { color: var(--primary-700); }
+.unit-contacts { background: var(--ink); border-radius: var(--radius-lg); padding: 1.75rem; color: rgba(255, 255, 255, 0.9); height: 100%; position: relative; overflow: hidden; }
+.unit-contacts::before { content: ""; position: absolute; inset: 0; background-image: url("../assets/images/pattern/pattern-white.png"); background-repeat: no-repeat; background-position: right -120px bottom -80px; background-size: 380px auto; opacity: 0.1; pointer-events: none; }
+.unit-contacts > * { position: relative; }
+.unit-contacts h2 { color: #fff; position: relative; padding-bottom: 0.6rem; margin-bottom: 1.25rem; }
+.unit-contacts h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 42px; height: 3px; background: var(--uon-red); border-radius: 2px; }
+.unit-contacts-list li { display: flex; gap: 0.75rem; margin-bottom: 0.85rem; font-size: 0.92rem; }
+.unit-contacts-list .bi { color: var(--primary); font-size: 1.1rem; flex: 0 0 auto; }
+.unit-contacts a { color: rgba(255, 255, 255, 0.92); }
+.unit-contacts a:hover { color: var(--primary); }
+.unit-contacts hr { border-color: rgba(255, 255, 255, 0.2); opacity: 1; }
+.unit-contacts-follow { font-family: var(--font-ui); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; margin-bottom: 0.6rem; }
+.unit-social a { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.25); display: inline-grid; place-items: center; }
+.unit-social a:hover { background: var(--primary-600); border-color: var(--primary-600); color: #fff; }

@@ -1,0 +1,13 @@
+{
+    "private": true,
+    "description": "Dependências de frontend auto-alojadas em public/vendor (sem build step). Ver docs/INSTALACAO.md.",
+    "scripts": {
+        "vendor:sync": "node tools/sync-vendor.cjs"
+    },
+    "devDependencies": {
+        "bootstrap": "5.3.3",
+        "bootstrap-icons": "1.11.3",
+        "tinymce": "6.8.5",
+        "tinymce-i18n": "24.7.29"
+    }
+}

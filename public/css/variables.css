@@ -1,0 +1,249 @@
+/* ==========================================================================
+   VARIABLES.CSS
+   Identidade visual, tipografia e tokens de design do template.
+   Adaptado à identidade da Universidade Onze de Novembro (UON) a partir do
+   logótipo oficial. Os tokens originais do template foram preservados;
+   apenas os valores foram alterados.
+   ========================================================================== */
+
+/* ---- Tipografia (self-hosted) ---- */
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/montserrat/Montserrat-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/montserrat/Montserrat-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/montserrat/Montserrat-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/montserrat/Montserrat-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/montserrat/Montserrat-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/montserrat/Montserrat-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/montserrat/Montserrat-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lora";
+  src: url("../assets/fonts/lora/Lora-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lora";
+  src: url("../assets/fonts/lora/Lora-Italic-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* ======================================================================
+     IDENTIDADE CROMÁTICA — UNIVERSIDADE ONZE DE NOVEMBRO (UON)
+     Extraída do logótipo oficial (LOGO_UON_160X100.png):
+       vermelho da faixa  #FF0000 · texto do logótipo #2E2C2C · preto #000000
+       amarelo da estrela #F3E800 · branco
+     Os nomes das variáveis do template (--primary, --ink, ...) mantêm-se,
+     para que todos os componentes originais herdem a nova identidade.
+     ====================================================================== */
+  --uon-red: #ff0000;            /* vermelho oficial do logótipo — uso gráfico */
+  --uon-charcoal: #2e2c2c;       /* cinzento-escuro do lettering do logótipo */
+  --uon-black: #000000;
+  --uon-yellow: #f3e800;         /* amarelo da estrela — destaque pontual */
+  --uon-white: #ffffff;
+
+  /* ---- Cor de marca (tokens do template) ---- */
+  --primary: #ff3838;          /* vermelho UON para texto/ícones sobre fundos escuros (contraste AA sobre --ink) */
+  --primary-rgb: 209, 0, 0;
+  --primary-600: #d10000;      /* vermelho UON para texto/botões sobre branco (contraste 5,6:1 — AA) */
+  --primary-700: #a30000;      /* hover / activo */
+  --primary-50: #fff1f1;       /* tinta muito clara — fundos de destaque */
+  --primary-100: #ffd9d9;
+
+  --ink: #1d1b1b;              /* quase-preto quente (derivado de #2E2C2C) — texto principal e superfícies escuras */
+  --brand-black: #000000;
+
+  /* ---- Neutros ---- */
+  --text: #2a2727;
+  --muted: #5f5a5a;
+  --muted-2: #8a8484;
+  --border: #e6e2e2;
+  --border-strong: #cfc9c9;
+  --surface: #ffffff;
+  --surface-alt: #f7f6f6;
+  --bg: #ffffff;
+
+  /* ---- Estado ---- */
+  --success: #1a7f4e;
+  --warning: #9a6700;
+  --danger: #b42318;
+  --info: #155e99;
+
+  /* ---- Aliases --uon-* (usados no CMS e em componentes novos) ---- */
+  --uon-primary: var(--primary-600);
+  --uon-primary-dark: var(--primary-700);
+  --uon-secondary: var(--ink);
+  --uon-accent: var(--uon-yellow);
+  --uon-text: var(--text);
+  --uon-muted: var(--muted);
+  --uon-background: var(--bg);
+  --uon-surface: var(--surface-alt);
+  --uon-border: var(--border);
+  --uon-success: var(--success);
+  --uon-warning: var(--warning);
+  --uon-danger: var(--danger);
+  --uon-info: var(--info);
+
+  /* ---- Contentor global (.site-shell) ---- */
+  --site-max-width: none;
+  --site-width: 100%;
+  --site-outer-background: #ffffff;
+
+  /* ---- Tipografia ---- */
+  --font-heading: "Montserrat", "Segoe UI", Arial, sans-serif;
+  --font-body: "Lora", Georgia, "Times New Roman", serif;
+  --font-ui: "Montserrat", "Segoe UI", Arial, sans-serif;
+
+  /* ---- Espaçamento / grelha ---- */
+  --gutter: 1.5rem;
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px rgba(29, 27, 27, 0.06);
+  --shadow: 0 6px 24px rgba(29, 27, 27, 0.08);
+  --shadow-lg: 0 16px 48px rgba(29, 27, 27, 0.12);
+
+  /* ---- Layout ---- */
+  --topbar-h: 40px;
+  --header-h: 84px;
+  --container-max: 1440px;
+  --site-gutter: clamp(16px, 4vw, 48px); /* espaço mínimo entre o conteúdo e as bordas do ecrã */
+
+  /* ---- Bootstrap overrides ---- */
+  --bs-primary: var(--primary-600);
+  --bs-primary-rgb: 209, 0, 0;
+  --bs-body-font-family: var(--font-ui);
+  --bs-body-color: var(--text);
+  --bs-link-color: var(--primary-600);
+  --bs-link-color-rgb: 209, 0, 0;
+  --bs-link-hover-color: var(--primary-700);
+  --bs-link-hover-color-rgb: 163, 0, 0;
+  --bs-border-color: var(--border);
+  --bs-success: var(--success);
+  --bs-danger: var(--danger);
+}
+
+/* ---- Reset leve / base ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--topbar-h) + var(--header-h) + 12px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  font-family: var(--font-ui);
+  color: var(--text);
+  background-color: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-heading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.font-body,
+.article-body,
+p.lead-serif {
+  font-family: var(--font-body);
+}
+
+a {
+  color: var(--primary-600);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--primary-700);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid var(--primary-600);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--primary-100);
+  color: var(--ink);
+}
+
+.container-xl,
+.container-xxl {
+  max-width: var(--container-max);
+}
+
+.text-primary-brand { color: var(--primary-600) !important; }
+.bg-primary-brand { background-color: var(--primary) !important; }
+.bg-ink { background-color: var(--ink) !important; }
+.text-muted-brand { color: var(--muted) !important; }

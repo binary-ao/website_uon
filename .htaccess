@@ -1,0 +1,30 @@
+# =========================================================================
+# Protecção da raiz do projecto (cenário XAMPP sem VirtualHost).
+# A configuração recomendada é um VirtualHost com DocumentRoot em public/
+# (ver docs/INSTALACAO.md). Este ficheiro garante que, ao aceder a
+# http://localhost/uon_edu/, o visitante é enviado para public/ e que
+# .env, vendor/, storage/, logs, ZIPs, etc. nunca ficam acessíveis.
+# =========================================================================
+
+Options -Indexes
+
+# Bloqueio explícito de ficheiros sensíveis (defesa em profundidade)
+<FilesMatch "(^\.|\.(env|log|sql|zip|lock|ini|sh|bat|phar|bak)$|^artisan$)">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Pastas internas nunca acessíveis
+    RewriteRule ^(app|bootstrap|config|database|docs|node_modules|reference|resources|routes|storage|tests|tools|vendor)(/|$) - [F,L]
+
+    # Tudo o resto é redireccionado para public/ (o Laravel só é servido a partir daí)
+    RewriteCond %{REQUEST_URI} !/public(/|$)
+    RewriteCond %{REQUEST_URI}::$1 ^(.*?/)(.*)::\2$
+    RewriteRule ^(.*)$ %1public/$1 [R=302,L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    Require all denied
+</IfModule>

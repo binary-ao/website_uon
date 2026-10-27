@@ -1,0 +1,19 @@
+# Biblioteca multimédia: apenas ficheiros estáticos. Nunca executar scripts aqui.
+Options -Indexes -ExecCGI
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+    php_flag engine off
+</IfModule>
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phar .pl .py .cgi .asp .aspx .jsp .sh
+RemoveType .php .phtml .php3 .php4 .php5 .php7 .php8 .phar
+<FilesMatch "\.(?i:php\d?|phtml|phar|pl|py|cgi|asp|aspx|jsp|sh|svg|html?|js)$">
+    Require all denied
+</FilesMatch>
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>

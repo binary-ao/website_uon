@@ -1,0 +1,70 @@
+/* ==========================================================================
+   RESPONSIVE.CSS
+   Ajustes finos por breakpoint (mobile-first). O grid e utilitários do
+   Bootstrap tratam da maior parte da reorganização; aqui apenas afinamos
+   espaçamentos, tipografia fluida e comportamento de componentes próprios.
+   ========================================================================== */
+
+/* ---- < 576px (telemóveis pequenos) ---- */
+@media (max-width: 575.98px) {
+  .hero { padding: 3.25rem 0 3rem; text-align: center; }
+  .hero .hero-actions { justify-content: center; }
+  .hero-stats { justify-content: center; }
+  .section { padding: 3rem 0; }
+  .cta-banner { padding: 2rem; text-align: center; }
+  .research-panel { padding: 2rem; }
+  .card-news.featured .card-body { padding: 1.25rem; }
+  .about-figure-tag { position: static; margin-top: -2.5rem; margin-left: auto; margin-right: 1rem; }
+  .page-header { padding: 2.5rem 0; text-align: center; }
+  .page-header .breadcrumb { justify-content: center; }
+}
+
+/* ---- < 768px ---- */
+@media (max-width: 767.98px) {
+  .brand-logo img { height: 34px; }
+  .topbar .topbar-links { display: none; }
+  .doc-row { flex-direction: column; align-items: flex-start; }
+  .course-toc { position: static; margin-bottom: 2rem; }
+  .table-responsive-wrap { border: none; }
+}
+
+/* ---- 768px – 991.98px (tablet) ---- */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .hero h1 { font-size: 2.6rem; }
+  .research-panel { padding: 2.75rem; }
+}
+
+/* ---- < 992px: navbar em offcanvas ---- */
+@media (max-width: 991.98px) {
+  .main-nav { display: none; }
+  .header-cta .d-lg-inline { display: none !important; }
+  .site-header .container-xl { flex-wrap: nowrap; }
+}
+
+/* ---- ≥ 992px: navbar desktop ---- */
+@media (min-width: 992px) {
+  .navbar-toggler,
+  .offcanvas-trigger { display: none !important; }
+}
+
+/* ---- 1400px+ (ecrãs largos) ---- */
+@media (min-width: 1400px) {
+  .hero h1 { font-size: 3.6rem; }
+  .section { padding: 6rem 0; }
+}
+
+/* ---- Tabelas: scroll horizontal em vez de quebra de layout ---- */
+.table-responsive-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---- Imagens sempre responsivas ---- */
+img { max-width: 100%; height: auto; }
+
+/* ---- Impressão (páginas institucionais / documentos) ---- */
+@media print {
+  .site-header, .topbar, .site-footer, #backToTop, .breadcrumb-bar, .cta-banner, .hero-actions {
+    display: none !important;
+  }
+}
